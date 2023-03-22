@@ -1,0 +1,24 @@
+# http://docs.editorconfig.org/en/master/editorconfig-format.html
+
+# top-most EditorConfig file
+root = true
+
+[*]
+indent_style = tab
+indent_size = 3
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# .Net Code
+[*.{cs,csx,vb,vbx}]
+insert_final_newline = true
+
+# Shell script
+[*.sh]
+end_of_line = lf
+
+# Markdown
+[*.md]
+trim_trailing_whitespace = "false"

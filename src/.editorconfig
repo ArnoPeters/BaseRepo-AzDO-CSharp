@@ -1,0 +1,8 @@
+[*.{cs,vb,props,targets}]
+indent_size = 2
+
+# Dotnet code style settings:
+[*.{cs,vb}]
+# Sort using and Import directives with System.* appearing first
+dotnet_sort_system_directives_first = true
+

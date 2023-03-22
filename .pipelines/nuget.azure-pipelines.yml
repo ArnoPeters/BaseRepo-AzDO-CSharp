@@ -1,0 +1,57 @@
+## This generates an ever-increasing number based on the date and build. Useful for CI\CD scenario's.
+name: $(date:yyyy.M.d)$(rev:.r) 
+
+## Pull request builds in yaml works in Github repo's, but needs to be setup via "manage repositories" when the repo is hosted in Azure Devops instead
+#pr:
+#  branches:
+#    include:
+#    - main
+
+trigger:
+  branches:
+    include: 
+    - main
+  paths:
+    exclude:
+    - /.vscode/*
+    - /docs/*
+    - /*.md
+    - .editorconfig
+    - /**/.editorconfig
+    - .gitignore
+    - /**/.gitignore
+    
+resources:
+  repositories:
+    - repository: yamlTemplates
+      type: github
+      name: "#UserName/#RepoName"
+      endpoint: #AzureDevopsGithubEndpointName
+
+variables:
+  # File includes can ONLY have a 'variables' section
+  - template: authors.yml
+  #- group: '#GroupName' # Groups are linked to Azure Devops -> Pipelines > Library > Variable Group. Keep secrets there instead of in the actual source. 
+  # Other values as key-value pair, or Groups won't work. https://learn.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml#use-a-variable-group
+  #- name: Key 
+  #  value: 'Value'
+
+stages:
+- stage: Build
+  displayName: Build and Publish nuget package 
+  pool:
+    vmImage: 'ubuntu-latest'
+  jobs:
+  - template: AzDO/yaml/jobs/AzDOArtifacts_publishNugetPackage.yml@yamlTemplates
+    parameters:
+      azureArtifactsTargetFeed: '#TeamProjectName/#ArtifactsFeedName'
+      buildSteps: 
+      - task: UseDotNet@2
+        displayName: 'Use dotnet 6'
+        inputs:
+          version: '6.0.x'
+      - template: AzDO/yaml/steps/buildAndTest.yml@yamlTemplates
+        parameters:
+          azureArtifactsSourceFeed: '#TeamProjectName/#ArtifactsFeedName'
+          runSettingsFile: 'src/.runsettings'
+
