@@ -13,8 +13,7 @@
 
 # Repo Guidelines
 - All Source and solution files should go under the /src folder
-- The /Docs folder is optimized for use as an [Azure Devops Code wiki](https://learn.microsoft.com/en-us/azure/devops/project/wiki/publish-repo-to-wiki?view=azure-devops&tabs=browser). A code wiki can be used to edit the documentation during a pull request as well.
+- The /Docs folder is optimized for use as an [Azure DevOps Code wiki](https://learn.microsoft.com/en-us/azure/devops/project/wiki/publish-repo-to-wiki?view=azure-devops&tabs=browser). A code wiki can be used to edit the documentation during a pull request as well.
 
-- New users of the repository should start out by checking the instructions in [Getting Started](docs/Getting-Started.md)
-- Documentation specific for this repo should be kept in [Markdown](https://www.markdownguide.org/getting-started/)-textfiles in the [/docs](docs) folder.
+- New users of the repository should start out by checking the instructions in [Getting Started]Documentation specific to this repo should be kept in [Markdown](https://www.markdownguide.org/getting-started/)-textfiles in the [/docs](docs) folder.
 - A log of architectural decisions is kept in the [docs/Architectural Decision Records](docs/ADRs-%252D-Architectural-Decision-Records.md) folder.
