@@ -1,12 +1,13 @@
 ## This generates an ever-increasing number based on the date and build. Useful for CI\CD scenario's.
 name: $(date:yyyy.M.d)$(rev:.r) 
 
-## Pull request builds in yaml works in Github repo's, but needs to be setup via "manage repositories" when the repo is hosted in Azure Devops instead
-#pr:
-#  branches:
-#    include:
-#    - main
-
+## GITHUB: specify the Pull Request Builds in yaml as below.
+## Azure Devops: setup Pull Request Builds via "manage repositories" - "Branch Policies" in the Azure Devops UI instead. 
+pr:
+  branches:
+    include:
+    - main
+    
 trigger:
   branches:
     include: 
@@ -20,17 +21,18 @@ trigger:
     - /**/.editorconfig
     - .gitignore
     - /**/.gitignore
-    
+
 resources:
   repositories:
     - repository: yamlTemplates
       type: github
       name: "#UserName/#RepoName"
       endpoint: #AzureDevopsGithubEndpointName
+      #ref: string  # ref name to use; defaults to 'refs/heads/main'
 
 variables:
   # File includes can ONLY have a 'variables' section
-  - template: authors.yml
+  - template: build/authors.yml
   #- group: '#GroupName' # Groups are linked to Azure Devops -> Pipelines > Library > Variable Group. Keep secrets there instead of in the actual source. 
   # Other values as key-value pair, or Groups won't work. https://learn.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml#use-a-variable-group
   #- name: Key 
