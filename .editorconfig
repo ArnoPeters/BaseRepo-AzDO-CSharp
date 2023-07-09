@@ -11,14 +11,10 @@ indent_size = 3
 indent_style = space
 indent_size = 2
 
-# .Net Code
-[*.{cs,csx,vb,vbx}]
-insert_final_newline = true
-
 # Shell script
 [*.sh]
-end_of_line = lf
+end_of_line = lf # prevents compatiblitiy issues when writing scripts in windows.
 
 # Markdown
 [*.md]
-trim_trailing_whitespace = "false"
+trim_trailing_whitespace = "false" # prevents layouts (bullet lists etc) failing
