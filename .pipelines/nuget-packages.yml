@@ -38,11 +38,12 @@ variables:
   #- name: Key 
   #  value: 'Value'
 
+pool:
+  vmImage: 'ubuntu-latest'
+
 stages:
 - stage: Build
   displayName: Build and Publish nuget package 
-  pool:
-    vmImage: 'ubuntu-latest'
   jobs:
   - template: AzDO/yaml/jobs/AzDOArtifacts_publishNugetPackage.yml@yamlTemplates
     parameters:

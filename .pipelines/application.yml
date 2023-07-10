@@ -41,11 +41,12 @@ variables:
   #- name: Key 
   #  value: 'Value'
 
+pool: 
+  vmImage: 'ubuntu-latest'
+
 stages:
 - stage: Build
   displayName: Buildstage
-  pool: #default 
-    vmImage: 'ubuntu-latest'
   jobs:
   - job: Build
     displayName: Buildjob
